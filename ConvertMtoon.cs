@@ -1,4 +1,4 @@
-// Œ»ó"VRM/MToon"‚Ì‚İ
+ï»¿// ç¾çŠ¶"VRM/MToon"ã®ã¿
 
 namespace ConvertMtoon
 {
@@ -7,12 +7,12 @@ namespace ConvertMtoon
 
     public class ConvertMtoon : EditorWindow
     {
-        // Hierarchyã‚Å‘I‘ğ‚µ‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚ğConvert‚·‚é
+        // Hierarchyä¸Šã§é¸æŠã—ã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’Convertã™ã‚‹
         void DoConvert()
         {
-            var gameObjects = Selection.activeGameObject; // ƒŠƒl[ƒ€‘ÎÛ‚ÌGameObject
+            var gameObjects = Selection.activeGameObject; // ãƒªãƒãƒ¼ãƒ å¯¾è±¡ã®GameObject
 
-            // Undo‚É“o˜^
+            // Undoã«ç™»éŒ²
             Undo.RecordObject(gameObjects, "Convert Mtoon");
 
             // Convert
@@ -20,14 +20,14 @@ namespace ConvertMtoon
 
         }
 
-        // EditorWindow‚Ì•`‰æˆ—
+        // EditorWindowã®æç”»å‡¦ç†
         void OnGUI()
         {
-            EditorGUILayout.LabelField("Hierarchyã‚Å‘I‘ğ‚µ‚Ä‚¢‚éRootƒIƒuƒWƒFƒNƒg‚ÌShader‚ğVRM/MToon‚É•ÏX‚µ‚Ü‚·");
+            EditorGUILayout.LabelField("Hierarchyä¸Šã§é¸æŠã—ã¦ã„ã‚‹Rootã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®Shaderã‚’VRM/MToonã«å¤‰æ›´ã—ã¾ã™");
             GUILayout.Space(2f);
 
 
-            // ƒ{ƒ^ƒ“‚ğ•\¦
+            // ãƒœã‚¿ãƒ³ã‚’è¡¨ç¤º
             if (GUILayout.Button("Convert"))
             {
                 this.DoConvert();
@@ -36,14 +36,14 @@ namespace ConvertMtoon
             EditorGUI.EndDisabledGroup();
         }
 
-        // ƒEƒBƒ“ƒhƒE‚ğŠJ‚­
+        // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‹ã
         [MenuItem("Purini/ConvertMtoon")]
         static void Open()
         {
             GetWindow<ConvertMtoon>();
         }
 
-        // ƒEƒBƒ“ƒhƒE‚ğŠJ‚­
+        // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‹ã
         public static void changeShader(GameObject targetGameObject, string ShaderName_to, string ShaderName_from = "")
         {
             // List<GameObject> ret = new List<GameObject>();
@@ -59,6 +59,8 @@ namespace ConvertMtoon
                         {
                             material.shader = Shader.Find(ShaderName_to);
                             material.SetColor("_ShadeColor", Color.white);
+                            var mainTex = material.GetTexture("_MainTex");
+                            material.SetTexture("_ShadeTexture", mainTex);
                         }
                         else
                         {
